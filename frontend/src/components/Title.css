@@ -1,0 +1,15 @@
+.Title {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  padding: 1em;
+  margin-bottom: 2em;
+  color: #555;
+  border-bottom: 1px solid  #CCC;
+}
+
+.Title-Subtitle {
+  color: rgba(100, 100, 100, 0.75);
+}
