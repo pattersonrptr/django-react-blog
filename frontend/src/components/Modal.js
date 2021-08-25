@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import {
     Button,
     Modal,
@@ -9,7 +10,6 @@ import {
     FormGroup,
     Input,
     Label
-
 } from "reactstrap";
 
 export default class CustomModal extends Component {
@@ -19,23 +19,23 @@ export default class CustomModal extends Component {
             activeItem: this.props.activeItem
         };
     }
+
+    // Verifica se tem evento de mudança, atualiza o activeItem
     handleChange = e => {
         let { name, value } = e.target;
-        console.log(name)
-        console.log(value)
+
         if (e.target.type === "checkbox") {
             value = e.target.checked;
         }
-
-        console.log(name)
-        console.log(value)
 
         const activeItem = { ...this.state.activeItem, [name]: value };
         this.setState({ activeItem });
     };
 
+    // Renderiza o modal
     render() {
         const { toggle, onSave } = this.props;
+
         return (
             <Modal isOpen={true} toggle={toggle}>
                 <ModalHeader toggle={toggle}>Post Item</ModalHeader>
@@ -44,11 +44,11 @@ export default class CustomModal extends Component {
                         <FormGroup>
                             <Label for="title">Title</Label>
                             <Input
-                              type="text"
-                              name="title"
-                              value={this.state.activeItem.title}
-                              onChange={this.handleChange}
-                              placeholder="Enter Post Title"
+                                type="text"
+                                name="title"
+                                value={this.state.activeItem.title}
+                                onChange={this.handleChange}
+                                placeholder="Enter Post Title"
                             />
                         </FormGroup>
                         <FormGroup>
@@ -59,16 +59,16 @@ export default class CustomModal extends Component {
                             value={this.state.activeItem.text}
                             onChange={this.handleChange}
                             placeholder="Enter Post text"
-                            />
+                        />
                         </FormGroup>
                         <FormGroup check>
-                            <Label for="published">
+                            <Label for="publish">
                                 <Input
                                 type="checkbox"
                                 name="publish"
                                 checked={this.state.activeItem.published_date}
                                 onChange={this.handleChange}
-                                />
+                            />
                                 Publish
                             </Label>
                         </FormGroup>
