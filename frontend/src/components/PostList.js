@@ -9,7 +9,6 @@ class PostList extends Component {
     constructor(props) {
         super(props);
 
-        // Estado inicial do componente
         this.state = {
             viewCompleted: false,
             postList: [],
@@ -22,12 +21,10 @@ class PostList extends Component {
         };
     }
 
-    // É invocado imediatamente após um componente ser montado
     componentDidMount() {
         this.refreshList();
     }
 
-    // axios é uma biblioteca JavaScript que nos permite fazer requisições na nossa API
     // Pega todos os posts
     refreshList = () => {
         axios
