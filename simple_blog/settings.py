@@ -33,7 +33,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -61,8 +60,17 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',    # frontend will be served on this port
+    'http://localhost:3000',    # Frontend will be served on this port
 ]
+
+# Configuração para permitir acesso não restrito para a API e define o formato de
+# teste padrão como JSON para todas as requisições.
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [],
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
 
 ROOT_URLCONF = 'simple_blog.urls'
 
@@ -90,8 +98,12 @@ WSGI_APPLICATION = 'simple_blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'simple_blog',
+        'USER': 'patterson',
+        'PASSWORD': '1234',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
 
