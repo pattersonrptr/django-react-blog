@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Modal from "./Modal";
 import {Post} from './Post';
 import axios from "axios";
+import {connect} from 'react-redux'
+import {getPosts, createPost, updatePost, deletePost} from '../store/actions/postsAction'
 
 
 class PostList extends Component {
@@ -26,11 +28,15 @@ class PostList extends Component {
     }
 
     // Pega todos os posts
-    refreshList = () => {
-        axios
+    refreshList = async () => {
+        /*axios
             .get("/api/posts/")
             .then((res) => this.setState({ postList: res.data }))
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err));*/
+        await this.props.getPosts()
+
+        const {posts} = this.props.posts;
+        this.setState({ postList: posts });
     };
 
 
@@ -40,25 +46,34 @@ class PostList extends Component {
     };
 
     // Cria um Post se o item passado tiver id, do contrário edita o Post existente
-    handleSubmit = (item) => {
+    handleSubmit = async (item) => {
         this.toggle();
 
         if (item.id) {
-            axios
+            /*axios
                 .put(`/api/posts/${item.id}/`, item)
-                .then((res) => this.refreshList());
+                .then((res) => this.refreshList());*/
+
+            await this.props.updatePost(item);
+            this.refreshList();
+
             return;
         }
-        axios
+        /*axios
             .post("/api/posts/", item)
-            .then((res) => this.refreshList());
+            .then((res) => this.refreshList());*/
+        await this.props.createPost(item);
+        this.refreshList();
     };
 
     // Deleta um Post
-    handleDelete = (item) => {
-        axios
+    handleDelete = async (item) => {
+        /*axios
             .delete(`/api/posts/${item.id}/`)
-            .then((res) => this.refreshList());
+            .then((res) => this.refreshList());*/
+
+        await this.props.deletePost(item);
+        this.refreshList();
     };
 
     // Cria um novo active item e 'abre' o modal
@@ -104,6 +119,8 @@ class PostList extends Component {
     // Renderiza todos os posts
     renderItems = () => {
         const { viewCompleted } = this.state;
+
+
         const newItems = this.state.postList.filter(
             (item) => (item.published_date ? true : false) === viewCompleted
         );
@@ -125,6 +142,8 @@ class PostList extends Component {
 
     // renderiza as abas, os itens e o modal caso o estado do modal seja true
     render() {
+        const {posts} = this.props.posts
+
         return (
             <main className="container">
                 <h1 className="text-white text-uppercase text-center my-4">Simple Blog</h1>
@@ -161,4 +180,7 @@ class PostList extends Component {
         }
     }
 
-export default PostList;
+{/*export default PostList; */}
+const mapStateToProps  = (state) => ({posts:state.posts});
+
+export default connect(mapStateToProps, {getPosts, createPost, updatePost, deletePost})(PostList);

@@ -28,7 +28,7 @@ class Tag(models.Model):
 
 
 class Post(models.Model):
-    # author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
+    # author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     tags = models.ManyToManyField(Tag)
     title = models.CharField(max_length=200)
@@ -47,6 +47,7 @@ class Post(models.Model):
         return self.title
 
 
+# TODO implement CommentLists and comment replies
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=80)
