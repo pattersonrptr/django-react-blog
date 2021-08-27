@@ -32,4 +32,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # node
-frontend/node_modules/.cache
+frontend/node_modules/*

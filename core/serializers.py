@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from .models import Post
-from .models import Category
-from .models import Comment
-from .models import Tag
+from .models.post_model import Post
+from .models.category_model import Category
+from .models.comment_model import Comment
+from .models.tag_model import Tag
 
 
 class PostSerializer(serializers.ModelSerializer):

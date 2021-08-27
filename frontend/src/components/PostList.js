@@ -29,10 +29,6 @@ class PostList extends Component {
 
     // Pega todos os posts
     refreshList = async () => {
-        /*axios
-            .get("/api/posts/")
-            .then((res) => this.setState({ postList: res.data }))
-            .catch((err) => console.log(err));*/
         await this.props.getPosts()
 
         const {posts} = this.props.posts;
@@ -50,28 +46,19 @@ class PostList extends Component {
         this.toggle();
 
         if (item.id) {
-            /*axios
-                .put(`/api/posts/${item.id}/`, item)
-                .then((res) => this.refreshList());*/
 
             await this.props.updatePost(item);
             this.refreshList();
 
             return;
         }
-        /*axios
-            .post("/api/posts/", item)
-            .then((res) => this.refreshList());*/
+
         await this.props.createPost(item);
         this.refreshList();
     };
 
     // Deleta um Post
     handleDelete = async (item) => {
-        /*axios
-            .delete(`/api/posts/${item.id}/`)
-            .then((res) => this.refreshList());*/
-
         await this.props.deletePost(item);
         this.refreshList();
     };
