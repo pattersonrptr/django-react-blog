@@ -4,12 +4,14 @@ export function Comment(props) {
     return (
         <div className="Comment">
             <div>
-                <p>User Name</p>
-                <br>
-                <p>Comment Date</p>
+                <p>{props.data.name}</p>
+                <br />
+                <p>{props.data.email}</p>
+                <br />
+                <p>{props.data.created_on ? new Date(props.data.created_on).toLocaleDateString() : ''}</p>
             </div>
             <div>
-                Comment Content
+                {props.data.body}
             </div>
         </div>
     );

@@ -1,4 +1,5 @@
 import React from 'react';
+import CommentsList from "./CommentsList";
 
 export function Post(props) {
     return (
@@ -35,6 +36,10 @@ export function Post(props) {
 
             <div className='post-text text-justify'>
                 {props.data.text}
+            </div>
+
+            <div>
+                <CommentsList post_id={props.data.id} />
             </div>
         </div>
     );

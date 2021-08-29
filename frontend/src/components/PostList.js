@@ -107,7 +107,6 @@ class PostList extends Component {
     renderItems = () => {
         const { viewCompleted } = this.state;
 
-
         const newItems = this.state.postList.filter(
             (item) => (item.published_date ? true : false) === viewCompleted
         );
@@ -129,7 +128,7 @@ class PostList extends Component {
 
     // renderiza as abas, os itens e o modal caso o estado do modal seja true
     render() {
-        const {posts} = this.props.posts
+        const {posts} = this.props.posts;
 
         return (
             <main className="container">
@@ -163,11 +162,11 @@ class PostList extends Component {
                     />
                 ) : null}
             </main>
-            );
-        }
+        );
     }
+}
 
-{/*export default PostList; */}
+// export default PostList;
 const mapStateToProps  = (state) => ({posts:state.posts});
 
 export default connect(mapStateToProps, {getPosts, createPost, updatePost, deletePost})(PostList);
