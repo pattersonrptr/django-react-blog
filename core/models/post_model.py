@@ -2,15 +2,15 @@ from . import *
 
 from django.utils import timezone
 
+from authentication.models import CustomUser
 from .category_model import Category
 from .tag_model import Tag
 
 
 class Post(models.Model):
-    # author = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    # TODO category does not have to be null=True
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+
     tags = models.ManyToManyField(Tag)
     title = models.CharField(max_length=200)
     text = models.TextField()

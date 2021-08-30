@@ -1,9 +1,9 @@
 import {GET_POSTS, CREATE_POST, UPDATE_POST, DELETE_POST, POSTS_ERROR} from '../types'
-import axios from 'axios'
+import axiosInstance from "../../axiosApi";
 
 export const getPosts = () => async dispatch => {
     try {
-        const res = await axios.get("/api/posts/");
+        const res = await axiosInstance.get("/posts/");
 
         dispatch( {
             type: GET_POSTS,
@@ -20,7 +20,7 @@ export const getPosts = () => async dispatch => {
 
 export const createPost = (post) => async dispatch => {
     try {
-        const res = await axios.post('/api/posts/', post);
+        const res = await axiosInstance.post('/posts/', post);
 
         dispatch( {
             type: CREATE_POST,
@@ -37,7 +37,7 @@ export const createPost = (post) => async dispatch => {
 
 export const updatePost = (post) => async dispatch => {
     try {
-        const res = await axios.put(`/api/posts/${post.id}/`, post);
+        const res = await axiosInstance.put(`/posts/${post.id}/`, post);
 
         dispatch( {
             type: UPDATE_POST,
@@ -54,7 +54,7 @@ export const updatePost = (post) => async dispatch => {
 
 export const deletePost = (post) => async dispatch => {
     try {
-        const res = await axios.delete(`/api/posts/${post.id}/`);
+        const res = await axiosInstance.delete(`/posts/${post.id}/`);
 
         dispatch( {
             type: DELETE_POST,

@@ -35,5 +35,8 @@ urlpatterns = [
 
     # API URLs
     path('api/', include(router.urls)),
-]
 
+    path('api/', include('authentication.urls')),
+
+    path('', include('frontend.urls')),
+]

@@ -7,7 +7,6 @@ import {getPosts, createPost, updatePost, deletePost} from '../store/actions/pos
 
 
 class PostList extends Component {
-
     constructor(props) {
         super(props);
 
@@ -16,11 +15,14 @@ class PostList extends Component {
             postList: [],
             modal: false,
             activeItem: {
+                author: "",
                 title: "",
                 text: "",
                 published_date: null,
             },
         };
+
+        this.createItem = this.createItem.bind(this);
     }
 
     componentDidMount() {
@@ -32,6 +34,7 @@ class PostList extends Component {
         await this.props.getPosts()
 
         const {posts} = this.props.posts;
+
         this.setState({ postList: posts });
     };
 
@@ -46,10 +49,8 @@ class PostList extends Component {
         this.toggle();
 
         if (item.id) {
-
             await this.props.updatePost(item);
             this.refreshList();
-
             return;
         }
 
@@ -65,8 +66,19 @@ class PostList extends Component {
 
     // Cria um novo active item e 'abre' o modal
     createItem = () => {
-        const item = { title: "", text: "", publish: null };
-        this.setState({ activeItem: item, modal: !this.state.modal });
+        const item = {
+            author: this.props.user,
+            title: "",
+            text: "",
+            publish: null
+        };
+
+        this.setState(
+            {
+                activeItem: item,
+                modal: !this.state.modal
+            }
+        );
     };
 
     // 'Abre' o modal para editar o item que é o activeItem
@@ -118,6 +130,7 @@ class PostList extends Component {
             >
                 <Post
                     data={item}
+                    loggedUser={this.props.user}
                     is_published={this.state.viewCompleted}
                     handleDelete={() => this.handleDelete(item)}
                     handleEditItem={() => this.editItem(item)}
@@ -130,20 +143,23 @@ class PostList extends Component {
     render() {
         const {posts} = this.props.posts;
 
+
         return (
             <main className="container">
-                <h1 className="text-white text-uppercase text-center my-4">Simple Blog</h1>
                 <div className="row">
                     <div className="col-md-12 col-sm-10 mx-auto p-0">
                         <div className="card p-3">
-                            <div className="mb-4">
-                                <button
-                                    className="btn btn-primary"
-                                    onClick={this.createItem}
-                                >
-                                    New Post
-                                </button>
-                            </div>
+
+                            {this.props.user ? (
+                                <div className="mb-4">
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={this.createItem}
+                                    >
+                                        New Post
+                                    </button>
+                                </div>
+                            ) : null}
 
                             {this.renderTabList()}
 

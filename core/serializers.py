@@ -7,7 +7,6 @@ from .models.tag_model import Tag
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Post
@@ -25,7 +24,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('id', 'post', 'name', 'email', 'body', )
+        fields = ('id', 'post', 'body', )
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -37,6 +36,7 @@ class TagSerializer(serializers.ModelSerializer):
     def get_fields(self, *args, **kwargs):
         fields = super(TagSerializer, self).get_fields(*args, **kwargs)
         request = self.context.get('request', None)
+
         if request and getattr(request, 'method', None) in ['POST', 'PUT']:
             fields['slug'].required = False
         return fields
