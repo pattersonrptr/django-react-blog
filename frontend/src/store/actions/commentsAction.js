@@ -3,11 +3,7 @@ import axiosInstance from "../../axiosApi";
 
 export const getComments = (post_id) => async dispatch => {
     try {
-        console.log("POST ID " + post_id)
-
         const res = await axiosInstance.get(`/comments/?post_id=${post_id}`);
-
-        console.log(res.data)
 
         dispatch({
             type: GET_COMMENTS,
