@@ -3,6 +3,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
 import MainContent from "./MainContent";
+import PostDetail from "./PostDetail";
 import axiosInstance from "../axiosApi";
 
 
@@ -43,6 +44,7 @@ class App extends Component {
                         <Route exact path={"/main/"} component={MainContent}/>
                         <Route exact path={"/login/"} component={Login}/>
                         <Route exact path={"/signup/"} component={Signup}/>
+                        <Route exact path={"/post/:postId"} component={PostDetail} />
                     </Switch>
                 </main>
             </div>

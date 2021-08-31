@@ -39,7 +39,7 @@ class MainContent extends Component {
         /*const isLoggedIn = this.state.userData ? true : false;
         let content;*/
 
-        content = (
+        const content = (
             <div className='container'>
                 <SideNav user={this.state.userData} />
                 <PostList user={this.state.userData} />

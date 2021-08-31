@@ -32,9 +32,7 @@ class PostList extends Component {
     // Pega todos os posts
     refreshList = async () => {
         await this.props.getPosts()
-
         const {posts} = this.props.posts;
-
         this.setState({ postList: posts });
     };
 
@@ -67,7 +65,7 @@ class PostList extends Component {
     // Cria um novo active item e 'abre' o modal
     createItem = () => {
         const item = {
-            author: this.props.user,
+            author: this.props.user.id,
             title: "",
             text: "",
             publish: null
@@ -142,7 +140,6 @@ class PostList extends Component {
     // renderiza as abas, os itens e o modal caso o estado do modal seja true
     render() {
         const {posts} = this.props.posts;
-
 
         return (
             <main className="container">

@@ -12,7 +12,7 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
 
     def get_permissions(self):
-        if self.action == 'list':
+        if self.action in ['list', 'retrieve']:
             permission_classes = (permissions.AllowAny,)
         else:
             permission_classes = (permissions.IsAuthenticated,)

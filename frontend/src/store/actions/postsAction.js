@@ -1,4 +1,4 @@
-import {GET_POSTS, CREATE_POST, UPDATE_POST, DELETE_POST, POSTS_ERROR} from '../types'
+import {GET_POSTS, GET_POST, CREATE_POST, UPDATE_POST, DELETE_POST, POSTS_ERROR} from '../types'
 import axiosInstance from "../../axiosApi";
 
 export const getPosts = () => async dispatch => {
@@ -7,6 +7,23 @@ export const getPosts = () => async dispatch => {
 
         dispatch( {
             type: GET_POSTS,
+            payload: res.data
+        });
+    }
+    catch(e){
+        dispatch( {
+            type: POSTS_ERROR,
+            payload: console.log(e),
+        })
+    }
+}
+
+export const getPost = (post) => async dispatch => {
+    try {
+        const res = await axiosInstance.get(`/posts/${post}`);
+
+        dispatch( {
+            type: GET_POST,
             payload: res.data
         });
     }

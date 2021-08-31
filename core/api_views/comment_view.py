@@ -18,6 +18,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         queryset = Comment.objects.all()
 
         if post_id:
+            print(post_id)
             queryset = queryset.filter(post_id=post_id)
 
         return queryset

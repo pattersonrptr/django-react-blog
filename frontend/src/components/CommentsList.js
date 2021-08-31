@@ -25,6 +25,8 @@ class CommentsList extends Component {
     }
 
     componentDidMount() {
+
+        console.log('PROPS ' + this.props.post.id)
         this.refreshList();
     }
 
@@ -83,7 +85,6 @@ class CommentsList extends Component {
     renderItems = () => {
         const newItems = this.state.commentList;
 
-
         return newItems.map((item) => (
             <li
                 key={item.id}
@@ -103,14 +104,20 @@ class CommentsList extends Component {
         return (
             <div>
                 <form className="form-comment" onSubmit={this.handleSubmit(this.state.activeItem)}>
-                    Comment
-                    <textarea name="comment" value={this.state.value} onChange={this.handleChange} />
-                    <button
-                        className="btn btn-primary"
-                        type="submit"
-                    >
-                        Submit
-                    </button>
+                    <div className="form-group">
+                        <h4>Leave a comment</h4>
+                        <label htmlFor="message">Message</label>
+                        <textarea name="msg" cols="30" rows="3" className="form-control comments-text-area"
+                            value={this.state.value}
+                            onChange={this.handleChange}>
+                        </textarea>
+                    </div>
+
+                    <div className="form-group"> <label htmlFor="name">Name</label> <input type="text" name="name" id="fullname" className="form-control" /> </div>
+                    <div className="form-group"> <label htmlFor="email">Email</label> <input type="text" name="email" id="email" className="form-control" /> </div>
+
+                    <button className="btn btn-primary" type="button">Post Comment</button>
+
                 </form>
                 <ul className="list-group list-group-flush border-top-0">
                     {this.renderItems()}

@@ -1,5 +1,7 @@
 import React from 'react';
+import { Switch, Route, Link } from "react-router-dom";
 import CommentsList from "./CommentsList";
+import PostDetail from "./PostDetail";
 
 export function Post(props) {
     let postUserId = props.data.author ? props.data.author : null;
@@ -38,13 +40,11 @@ export function Post(props) {
 
             <br/><br/>
 
-            <div className='post-text text-justify'>
+            <div className='post-content post-text text-justify'>
                 {props.data.text}
+                <Link to={"/post/" + props.data.id}>Read</Link>
             </div>
 
-            <div>
-                <CommentsList post={props.data}  />
-            </div>
         </div>
     );
 };
